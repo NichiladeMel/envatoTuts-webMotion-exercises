@@ -1,0 +1,149 @@
+.header-div {
+    height: 12vh;
+    position: sticky;
+    margin-bottom: 10vh;
+}
+
+.header-div header {
+    padding: 30px 50px 0px 50px;
+}
+
+.wrapper {
+    width: 1200px;
+    margin: auto;
+}
+
+h1 {
+    font-family: 'Times New Roman', Times, serif;
+}
+
+.gallery {
+    width: 100%;
+    height: fit-content;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.gallery li {
+    width: 25%;
+    height: 65vh;
+    border-radius: 2%;
+    overflow: hidden;
+    margin: 5vh;
+}
+
+figure {
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+figure a{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+}
+
+figure a img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+    transform: scale(1.2);
+    transition-property: transform;
+}
+
+figure figcaption {
+    position: absolute;
+    padding: 2.5rem 2.5rem 2.5rem 2.5rem;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+    gap: 1rem;
+    z-index: 1;
+}
+
+figcaption::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: linear-gradient(180deg, #1516183d 0%, #151618 100%);
+    opacity: 0;
+    transition-property: opacity;
+}
+
+figure figcaption main {
+    height: 40%;
+    opacity: 0;
+    transform: translate3d(0, -6rem, 0);
+    transition-property: opacity, transform;
+}
+
+figure figcaption footer {
+    width: 100%;
+    height: 20%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    position: relative;
+    opacity: 0;
+    transform: translate3d(0, +6rem, 0);
+    transition-property: opacity, transform;
+}
+
+figure figcaption footer img {
+    width: 60px;
+    height: 60px;
+    position: absolute;
+    right: 0;
+    opacity: 0;
+    transform: translate3d(-3rem, 0, 0) rotate(360deg);
+    transition-property: transform, opacity;
+    transition-delay: var(--transition-duration);
+}
+
+figure h3 {
+    line-height: 1.2;
+    margin: 20px 0;
+}
+
+figure p {
+    font-size: 1.3rem;
+    line-height: 1.2;
+}
+
+/* Transitions */
+
+figure:hover figcaption::before {
+    opacity: 1;
+}
+
+figure:hover figcaption main,
+figure:hover figcaption footer {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+}
+
+figure:hover a img {
+    transform: scale(1);
+}
+
+figure:hover figcaption footer img {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) rotate(0);
+}
+
+
+figcaption::before,
+figure main,
+figure footer,
+figure a img,
+figure figcaption footer img {
+    transition-duration: var(--transition-duration);
+    transition-timing-function: ease-in-out;
+}
+
+
+

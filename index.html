@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/main.css">
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            document.querySelectorAll(".header-nav ul > li").forEach(item => {
+                item.addEventListener("click", function (event) {
+                    event.stopPropagation(); // Prevents event bubbling
+
+                    let dropdown = this.querySelector(".has-submenue");
+                    if (dropdown) {
+                        dropdown.classList.toggle("show");
+                    }
+                });
+            });
+
+            // Close dropdowns when clicking anywhere outside
+            document.addEventListener("click", function () {
+                document.querySelectorAll(".has-submenue").forEach(menu => {
+                    menu.classList.remove("show");
+                });
+            });
+        });
+
+    </script>
+
+    <title>pixelPerfect</title>
+</head>
+<body>
+    <div class="header-div">
+        <header>
+            <div class="header-logo">
+                <img src="img/logo.png" alt="pixelPerfect logo">
+            </div>
+            <nav class="header-nav">
+                <ul>
+                    <li onclick="toggleDropdown()"><a href="#">Services</a>
+                        <ul class="has-submenue">
+                            <li><a href="#">Branding</a></li>
+                            <li><a href="#">Web Design</a></li>
+                            <li><a href="#">Web Development</a></li>
+                            <li><a href="#">eCommerce</a></li>
+                            <li><a href="#">Print</a></li>
+                        </ul>              
+                    </li>
+                    <li><a href="#">Company</a></li>
+                    <li><a href="gallery.html">Gallery</a></li>
+                    <li><a href="#">Careers</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+            </nav>
+            <button>Get a Quote</button>
+        </header>
+    </div>
+    
+</body>
+
+</html>
