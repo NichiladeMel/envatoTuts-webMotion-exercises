@@ -30,12 +30,8 @@
 
     .fill {
         position: absolute;
-        top: -100%;
-        left: -100%;
-        height: 0;
-        width: 0;
         border-radius: 50%;
-        background-color: blueviolet;
+        background-color: blueviolet; 
     }
 
 </style>
@@ -55,10 +51,64 @@
 <script>
     const magnet = document.querySelector('.magnet')
     const magnetText = document.querySelector('.magnet .text')
+    let boundBox = magnet.getBoundingClientRect()
+
+    //filling the magnet
+
+    // .fill {
+    //     position: absolute;
+    //     top: -100%;
+    //     left: -100%;
+    //     height: 0;
+    //     width: 0;
+    //     border-radius: 50%;
+    //     background-color: blueviolet;
+    // }
+
+    const magnetFill = (event) => {
+        const l = boundBox.left + (boundBox.width / 2)
+        const h = boundBox.top + (boundBox.height / 2)
+        let cursorX = event.clientX
+        let cursorY = event.clientY
+
+        newX = (cursorX < l) ? -100 : 100
+        newY = (cursorY < h) ? -100 : 100
+
+        gsap.set('.magnet .fill', {
+            x: newX,
+            y: newY,
+            height: 0,
+            width: 0
+        })
+        gsap.to('.magnet .fill', {
+            duration: 1,
+            width: '300%',
+            height: '300%',
+        })
+    }
+
+    const magnetFillRemove = (event) => {
+        // const l = boundBox.left + (boundBox.width / 2)
+        // const h = boundBox.top + (boundBox.height / 2)
+        // const lastcursorX = event.clientX
+        // const lastcursorY = event.clientY
+        
+        // newX = (lastcursorX < l) ? -100 : 100
+        // newY = (lastcursorY < h) ? -100 : 100
+
+        // gsap.to('.magnet .fill', {
+        //     x: newX,
+        //     y: newY
+        // })
+        gsap.to('.magnet .fill', {
+            duration: 1,
+            width: 0,
+            height: 0
+        })
+    }
 
     // When mouse enters
     const activateMagnet = (event) => {
-        let boundBox = magnet.getBoundingClientRect()
         const magnetStrength = 40
         const magnetTextStrength = 80
         const newX = ((event.clientX - boundBox.left)/magnet.offsetWidth) - 0.5
@@ -101,22 +151,12 @@
             ease: Elastic.easeOut
         })
     }
-    magnet.addEventListener('mouseenter', () => {
-        gsap.to('.magnet .fill', {
-            duration: 1,
-            width: '300%',
-            height: '300%',
-            // position: relative
-        })
-    })
+
+    magnet.addEventListener('mouseenter', magnetFill)
     magnet.addEventListener('mousemove', activateMagnet);
     magnet.addEventListener('mouseleave', () => {
         resetMagnet()
-        gsap.to('.magnet .fill', {
-            duration: 1,
-            width: 0,
-            height: 0,
-        })
+        magnetFillRemove()
     });
 
 </script>
